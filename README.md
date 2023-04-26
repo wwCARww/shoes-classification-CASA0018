@@ -2,9 +2,9 @@
 
 Jiani Che
 
-Link to github repo with project work:
+Link to github repo with project work:[https://github.com/wwCARww/shoes-classification-CASA0018](https://github.com/wwCARww/shoes-classification-CASA0018)
 
-Link to Edge Impulse projects: 
+Link to Edge Impulse projects: [https://studio.edgeimpulse.com/public/200120/latest](https://studio.edgeimpulse.com/public/200120/latest)
 ## Introduction
 Adidas and Nike shoe products have been popular with consumers for many years, however, in recent years consumers have faced the risk of potentially buying fake shoes. Identifying fake shoes with the naked eye is still risky and costly, so could automatic identification with high accuracy be accomplished if deep learning and AI technology were used?
 Before identifying the authenticity of shoes, we need to identify the brand and type of the shoes. There have been many attempts to use datasets of shoe images sourced from the web to train classification models for shoe brands and types[1]. But few projects have applied them to sensors for real-time recognition. Then the aim of our project is to train a classification model by using neural network based embedded AI to classify the brand of the shoes in the images. 
@@ -25,6 +25,8 @@ The application consists of three main building blocks:
 
 3) Model deployment, which involves running the best-trained model on new, unseen data to make predictions. In our application, the model is deployed on the Arduino Nano 33 BLE Sense board, which allows it to make real-time predictions on images captured by the onboard camera.
 
+![f1](https://raw.githubusercontent.com/wwCARww/shoes-classification-CASA0018/main/final-project/markdown-images/application_overview.png?token=GHSAT0AAAAAAB2HME5JLTIWNHBPIBK6SCZ6ZCJRLEQ)
+
 Figure1: Application structure of the building blocks
 
 All three building blocks are connected through the use of Edge Impulse, which acts as a central hub for data collection, model training, and deployment. The Arduino IDE is used to upload the trained model to the Arduino Nano 33 BLE Sense board, enabling it to perform inference on new data in real time.
@@ -37,26 +39,40 @@ As mentioned in the introduction, I used 2 shoes images datasets from different 
 - Dataset 1: existent Adidas and Nike shoes images downloaded from Google images.
 To create dataset 1, I used 2 image datasets from Kaggle which downloaded the shoe image from Google[2]. To improve the accuracy of the training model, I only used images with a white background. A total of 400 images were collected, with a 50/50 split between the two brands. And dataset 1 is used as one of the training datasets.
 
+![f2](https://raw.githubusercontent.com/wwCARww/shoes-classification-CASA0018/main/final-project/markdown-images/dataset1.png)
+
 Figure2: Overview of dataset 1 image data
 
 
 - Dataset 2: shoes images taken by an Arduino Sense onboard camera:
 Dataset 2 consists of 2 parts: 1) I took 80 images of 2 pairs of Nike and Adidas shoes in different angles as another training dataset; 2) 20 images of another 4 pairs of Nike and Adidas shoes were taken as our test dataset. All images were taken under almost the same light and background conditions. 
 
+![f3](https://raw.githubusercontent.com/wwCARww/shoes-classification-CASA0018/main/final-project/markdown-images/dataset2.png)
+
 Figure3: Overview of dataset 2 image data
+
+![f](https://raw.githubusercontent.com/wwCARww/shoes-classification-CASA0018/main/final-project/markdown-images/datasource.jpg)
 
 Figure4: Overview of dataset 2 data source 
 
 The following experiments were divided into 2 parts:
 
+![t1](https://raw.githubusercontent.com/wwCARww/shoes-classification-CASA0018/main/final-project/markdown-images/table1.png)
+
 Table1: Datasets description of experiment 1
+
+![t](https://raw.githubusercontent.com/wwCARww/shoes-classification-CASA0018/main/final-project/markdown-images/table2.png)
 
 Table2: Datasets description of experiment 2
 
 ###Data Processing
 After uploading the raw image data, Edge Impulse then processed the images by resizing and changing the color depth. In this project, the image data was resized into 96*96 and then converted into grayscale, which has the best performance in the model.
 
+![f5](https://raw.githubusercontent.com/wwCARww/shoes-classification-CASA0018/main/final-project/markdown-images/datapreprocessing.png)
+
 Figure5: Edge Impulse user interface of image data processing
+
+![f6](https://raw.githubusercontent.com/wwCARww/shoes-classification-CASA0018/main/final-project/markdown-images/colordepth.png)
 
 Figure6：Edge Impulse user interface of image data color depth 
 
@@ -65,13 +81,19 @@ Figure6：Edge Impulse user interface of image data color depth
 ## Model
 After data collection, a processing block and a learning block were required for feature generation and machine learning. For image detection projects, Edge Impulse recommended image transfer learning as the learning block. Though different learning blocks were applied as well, after a series of tests, image transfer learning and dataset 2 were chosen as our final training/test dataset for better performance. 
 
+![f7](https://raw.githubusercontent.com/wwCARww/shoes-classification-CASA0018/main/final-project/markdown-images/create_impulse.png)
+
 Figure7: Edge Impulse user interface of Impulse design
 
 Edge Impulse allows users to adjust the model in different ways, including a simplified visual mode, Kera(expert) mode and editing Python files locally. To build a better performance model, I modified multiple training settings and model architectures in 35 experiments. Among all experiments, the following settings and architecture have the best performance. 
 
-Figure8 & 9: Shoes Detection Model Neural Network Architecture and settings in the Edge Impulse user interface
+![f8](https://raw.githubusercontent.com/wwCARww/shoes-classification-CASA0018/main/final-project/markdown-images/settings.png)
+
+Figure8: Shoes Detection Model Neural Network Architecture and settings in the Edge Impulse user interface
 
 The key parameters settings are shown below:
+
+![t3](https://raw.githubusercontent.com/wwCARww/shoes-classification-CASA0018/main/final-project/markdown-images/table3.png)
 
 Table3: The key parameters settings of the final model
 
@@ -79,6 +101,8 @@ Table3: The key parameters settings of the final model
 ## Experiments
 What experiments did you run to test your project? What parameters did you change? How did you measure performance? Did you write any scripts to evaluate performance? Did you use any tools to evaluate performance? Do you have graphs of results? 
 Out of a total of 35 experiments, 13 experiments were conducted on datasets sourced from the web and 22 experiments were conducted on datasets taken by sensor cameras. And 11 parameters were selected for different combinations in the experiments.
+
+![t4](https://raw.githubusercontent.com/wwCARww/shoes-classification-CASA0018/main/final-project/markdown-images/parameters.png)
 
 Table4: Parameters changed during the experiments
 
@@ -90,6 +114,8 @@ As mentioned before, the experiments were divided into 2 parts:
 
 The experimental results show that the maximum accuracy of the machine learning model was only 64.36% when using image data from the network as the training set. Although the accuracy improved from 20.83% to 64.36% by adjusting the combination of parameters, the loss values remained high, which significantly reduces the usability of the deployment.
 
+![t5](https://raw.githubusercontent.com/wwCARww/shoes-classification-CASA0018/main/final-project/markdown-images/dataset1experi.png)
+
 Table5: Experiments records of experiment 1
 
 - Training data: dataset 2-1 (80 images)/Test Data: dataset 2-2 (20 images)
@@ -100,14 +126,19 @@ Two learning blocks, image transfer learning and Classification, were applied in
 
 In addition, experiments have shown that models with image transfer learning blocks performed better with grayscale image data, however, models with classification blocks performed better with RGB image data.
 
+![t6](https://raw.githubusercontent.com/wwCARww/shoes-classification-CASA0018/main/final-project/markdown-images/dataset2exp.png)
+
 Table6: Experiments records of experiment 2
 
 ## Results and Observations
 
 ###Results
 As mentioned in the experiment part, the accuracy of the model which used the image data from the network as the training set is not satisfactory. The model using the image data taken by the Arduino onboard camera as the training set was selected as the final model to be uploaded to the Arduino Nano sensor. The final model was obtained with a maximum testing accuracy of 95% and a validation accuracy of 87.5%. 
+![f9](https://raw.githubusercontent.com/wwCARww/shoes-classification-CASA0018/main/final-project/markdown-images/result1.png)
 
-Figure10 & 11: Validation accuracy and Testing Accuracy of the final model
+![f10](https://raw.githubusercontent.com/wwCARww/shoes-classification-CASA0018/main/final-project/markdown-images/test_result.png)
+
+Figure9 & 10: Validation accuracy and Testing Accuracy of the final model
 
 ###Observations
 
@@ -118,7 +149,7 @@ The images from the web may have different lighting conditions, angles, backgrou
 
 - Models with image transfer learning blocks performed better with grayscale image data, however, models with classification blocks performed better with RGB image data:
 
-Grayscale and RGB are two different color spaces used to represent digital images. Grayscale images have a single channel that represents the intensity of the image, whereas RGB images have three channels that represent the intensity of red, green, and blue colors in the image[]. In transfer learning, the pre-trained model is used to extract high-level features from the input image. Grayscale images have a lower dimensionality and therefore may require fewer computational resources for feature extraction, allowing the model to learn more efficiently. Additionally, the lack of color information may help the model focus on the distinctive shapes and textures of the shoe, which can be more important for brand detection. In classification, on the other hand, color information can be a crucial feature for distinguishing between Nike and Adidas shoes, as both brands have distinct color schemes that are often associated with their products. Using RGB color channels may provide the model with more information about these color differences, leading to better classification performance. 
+Grayscale and RGB are two different color spaces used to represent digital images. Grayscale images have a single channel that represents the intensity of the image, whereas RGB images have three channels that represent the intensity of red, green, and blue colors in the image[2]. In transfer learning, the pre-trained model is used to extract high-level features from the input image. Grayscale images have a lower dimensionality and therefore may require fewer computational resources for feature extraction, allowing the model to learn more efficiently. Additionally, the lack of color information may help the model focus on the distinctive shapes and textures of the shoe, which can be more important for brand detection. In classification, on the other hand, color information can be a crucial feature for distinguishing between Nike and Adidas shoes, as both brands have distinct color schemes that are often associated with their products. Using RGB color channels may provide the model with more information about these color differences, leading to better classification performance. 
 
 ###Reflections 
 Although the model has a theoretical accuracy of 95%, in practice the deployment accuracy is influenced by a number of factors.
@@ -144,11 +175,23 @@ In the end, detecting the brands of shoes is just a basic step before identifyin
 
 
 ## Bibliography
-*If you added any references then add them in here using this format:*
+###Data Source
 
-1. Last name, First initial. (Year published). Title. Edition. (Only include the edition if it is not the first edition) City published: Publisher, Page(s). http://google.com
 
-2. Last name, First initial. (Year published). Title. Edition. (Only include the edition if it is not the first edition) City published: Publisher, Page(s). http://google.com
+- [https://www.kaggle.com/datasets/die9origephit/nike-adidas-and-converse-imaged
+](https://www.kaggle.com/datasets/die9origephit/nike-adidas-and-converse-imaged
+)
+
+
+
+- [https://www.kaggle.com/datasets/ifeanyinneji/nike-adidas-shoes-for-image-classification-dataset
+](https://www.kaggle.com/datasets/ifeanyinneji/nike-adidas-shoes-for-image-classification-dataset
+)
+###Reference
+
+1. Rukshan Pramoditha, 2021. How RGB and Grayscale Images Are Represented in NumPy Arrays.  [online] Available at:[https://towardsdatascience.com/exploring-the-mnist-digits-dataset-7ff62631766a](https://towardsdatascience.com/exploring-the-mnist-digits-dataset-7ff62631766a)[Accessed 24 April 2023].
+
+2. kaggle.com, 2022. Shoes Classification Dataset | 13k Images |. [online] Available at:[https://www.kaggle.com/datasets/utkarshsaxenadn/shoes-classification-dataset-13k-images](https://www.kaggle.com/datasets/utkarshsaxenadn/shoes-classification-dataset-13k-images)[Accessed 24 April 2023].
 
 *Tip: we use [https://www.citethisforme.com](https://www.citethisforme.com) to make this task even easier.* 
 
