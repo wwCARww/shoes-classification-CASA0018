@@ -132,15 +132,18 @@ Table6: Experiments records of experiment 2
 
 ## Results and Observations
 
-###Results
+### Results
+
 As mentioned in the experiment part, the accuracy of the model which used the image data from the network as the training set is not satisfactory. The model using the image data taken by the Arduino onboard camera as the training set was selected as the final model to be uploaded to the Arduino Nano sensor. The final model was obtained with a maximum testing accuracy of 95% and a validation accuracy of 87.5%. 
+
 ![f9](https://raw.githubusercontent.com/wwCARww/shoes-classification-CASA0018/main/final-project/markdown-images/result1.png)
 
 ![f10](https://raw.githubusercontent.com/wwCARww/shoes-classification-CASA0018/main/final-project/markdown-images/test_result.png)
 
 Figure9 & 10: Validation accuracy and Testing Accuracy of the final model
 
-###Observations
+### Observations
+
 
 - Models performed better when using real-world images taken by Arduino Camera: 
 
@@ -151,7 +154,8 @@ The images from the web may have different lighting conditions, angles, backgrou
 
 Grayscale and RGB are two different color spaces used to represent digital images. Grayscale images have a single channel that represents the intensity of the image, whereas RGB images have three channels that represent the intensity of red, green, and blue colors in the image[2]. In transfer learning, the pre-trained model is used to extract high-level features from the input image. Grayscale images have a lower dimensionality and therefore may require fewer computational resources for feature extraction, allowing the model to learn more efficiently. Additionally, the lack of color information may help the model focus on the distinctive shapes and textures of the shoe, which can be more important for brand detection. In classification, on the other hand, color information can be a crucial feature for distinguishing between Nike and Adidas shoes, as both brands have distinct color schemes that are often associated with their products. Using RGB color channels may provide the model with more information about these color differences, leading to better classification performance. 
 
-###Reflections 
+### Reflections 
+
 Although the model has a theoretical accuracy of 95%, in practice the deployment accuracy is influenced by a number of factors.
 
 
@@ -175,8 +179,8 @@ In the end, detecting the brands of shoes is just a basic step before identifyin
 
 
 ## Bibliography
-###Data Source
 
+### Data Source
 
 - [https://www.kaggle.com/datasets/die9origephit/nike-adidas-and-converse-imaged
 ](https://www.kaggle.com/datasets/die9origephit/nike-adidas-and-converse-imaged
@@ -187,13 +191,13 @@ In the end, detecting the brands of shoes is just a basic step before identifyin
 - [https://www.kaggle.com/datasets/ifeanyinneji/nike-adidas-shoes-for-image-classification-dataset
 ](https://www.kaggle.com/datasets/ifeanyinneji/nike-adidas-shoes-for-image-classification-dataset
 )
-###Reference
+
+### Reference
 
 1. Rukshan Pramoditha, 2021. How RGB and Grayscale Images Are Represented in NumPy Arrays.  [online] Available at:[https://towardsdatascience.com/exploring-the-mnist-digits-dataset-7ff62631766a](https://towardsdatascience.com/exploring-the-mnist-digits-dataset-7ff62631766a)[Accessed 24 April 2023].
 
 2. kaggle.com, 2022. Shoes Classification Dataset | 13k Images |. [online] Available at:[https://www.kaggle.com/datasets/utkarshsaxenadn/shoes-classification-dataset-13k-images](https://www.kaggle.com/datasets/utkarshsaxenadn/shoes-classification-dataset-13k-images)[Accessed 24 April 2023].
 
-*Tip: we use [https://www.citethisforme.com](https://www.citethisforme.com) to make this task even easier.* 
 
 ----
 
